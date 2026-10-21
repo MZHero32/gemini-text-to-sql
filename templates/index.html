@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Text to SQL</title>
+<style>body{font:16px system-ui;background:#f3f6fa;color:#182636;max-width:1000px;margin:48px auto;padding:0 24px}textarea{box-sizing:border-box;width:100%;padding:16px;border:1px solid #b8c6d6;border-radius:8px;font:inherit}button{background:#205dcc;color:white;border:0;border-radius:6px;padding:12px 20px;margin:12px 0;cursor:pointer}pre{padding:18px;background:#182636;color:#e4efff;white-space:pre-wrap}table{border-collapse:collapse;width:100%;background:white}th,td{padding:10px;border:1px solid #d3dce7;text-align:left}.error{color:#a11}</style></head>
+<body><p>PYTHON / GEMINI / SQL SERVER</p><h1>Ask your database</h1><p>Describe the information you need, then review the generated SQL.</p>
+<form method="post"><label for="question">Your question</label><textarea id="question" name="question" rows="3" maxlength="2000" required>{{question}}</textarea><button name="action" value="generate">Generate SQL</button></form>
+{% if error %}<p class="error">{{error}}</p>{% endif %}
+{% if query %}<h2>Generated SQL</h2><pre>{{query}}</pre><form method="post"><input type="hidden" name="question" value="{{question}}"><input type="hidden" name="query" value="{{query}}"><button name="action" value="execute">Run reviewed query</button></form>{% endif %}
+{% if columns %}<h2>Results</h2><p>Showing up to 100 rows.</p><div style="overflow:auto"><table><thead><tr>{% for c in columns %}<th>{{c}}</th>{% endfor %}</tr></thead><tbody>{% for row in rows %}<tr>{% for value in row %}<td>{{value}}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>{% endif %}
+</body></html>

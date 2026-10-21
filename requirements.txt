@@ -1,0 +1,6 @@
+google-genai
+Flask>=3,<4
+python-dotenv>=1,<2
+pyodbc>=5,<6
+sqlglot>=25
+jupyterlab>=4,<5
